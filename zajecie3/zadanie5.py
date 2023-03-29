@@ -21,10 +21,38 @@ def ask_for_product():
     return {'name': name, 'amount': amount, 'price': price}
 
 
+def ask_for_int(prompt: str) -> int:
+    while True:
+        try:
+            return int(input(prompt))
+        except ValueError:
+            print("Trzeba podać liczbę")
+
+
 if __name__ == "__main__":
-    products = [
-        {'name': 'test', 'amount': 2, 'price': 20.0},
-        {'name': 'aaa', 'amount': 2, 'price': 10.0}
-    ]
-    products.append(ask_for_product())
-    print_table(products)
+    products = []
+    while True:
+        print("Podaj komende (dodaj, usun, pokaz, zmien):")
+        command = input(" > ")
+
+        if command == "dodaj":
+            products.append(ask_for_product())
+        elif command == "usun":
+            print_table(products)
+            index = ask_for_int("Nr: ") - 1
+            if 0 <= index < len(products):
+                del products[index]
+            else:
+                print("Niepoprawny numer")
+        elif command == "pokaz":
+            print_table(products)
+        elif command == "zmien":
+            print_table(products)
+            index = ask_for_int("Nr: ") - 1
+            if 0 <= index < len(products):
+                new_values = ask_for_product()
+                products[index] = new_values
+            else:
+                print("Niepoprawny numer")
+        else:
+            print("Nieznana komenda")
