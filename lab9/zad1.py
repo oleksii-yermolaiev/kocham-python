@@ -1,5 +1,5 @@
 def print_name_and_age(name, age):
-    print("Imie: " + name + ", age: " + age)
+    print(f"Imie: {name}, age: {age}")
 
 
 if __name__ == "__main__":
